@@ -1,48 +1,56 @@
-
-
-div.top-bar{
+div.top-bar {
   background-color: #8B0913;
 }
-.menu > li > a{
+
+.menu > li > a {
   background-color: #8B0913;
   color: #fff;
 }
-.menu > li > a:hover{
+
+.menu > li > a:hover {
   color: #f7f0cc;
 }
-div.top-bar-left h3{
+
+div.top-bar-left h3 {
   color: #fff;
 }
-.main-container{
+
+.main-container {
   display: flex;
   flex-flow: row nowrap;
   height: 46rem;
 }
-.left-cont{
+
+.left-cont {
   width: 70%;
   margin-left: 1em;
   margin-top: 1em;
 }
-.fc-event, .fc-event-dot{
+
+.fc-event, .fc-event-dot {
   background-color: #404F66;
 }
-.fc-event{
+
+.fc-event {
   border: 1px solid #404F66;
 }
-.fc-unthemed .fc-today{
+
+.fc-unthemed .fc-today {
   background: #fed1d5;
 }
-.calendario{
+
+.calendario {
   height: 100%;
 }
-.right-cont{
+
+.right-cont {
   width: 30%;
   display: flex;
   flex-flow: column nowrap;
   padding: 1em;
 }
 
-.add-btn{
+.add-btn {
   height: 70%;
   padding: 0.5em;
   display: flex;
@@ -51,20 +59,25 @@ div.top-bar-left h3{
   flex-flow: row wrap;
   color: #fff;
 }
-.add-btn{
+
+.add-btn {
   background-color: #404F66;
 }
-label{
+
+label {
   color: #fff;
 }
-#dia-set{
+
+#dia-set {
   margin-top: 2em;
 }
-.btn-cont-enviar{
+
+.btn-cont-enviar {
   display: flex;
   justify-content: center;
 }
-.delete-btn{
+
+.delete-btn {
   padding: 1em;
   height: 20%;
   background-color: #8B0913;
@@ -73,18 +86,21 @@ label{
   justify-content: center;
   color: #fff;
 }
-.delete-btn h6{
+
+.delete-btn h6 {
   width: 90%;
 }
-.delete-btn img{
+
+.delete-btn img {
 
   height: 60px;
 }
-table{
+
+table {
   background-color: transparent;
 }
-.calendar
-{
+
+.calendar {
 	width: 900px;
 	margin: 0 auto;
 }

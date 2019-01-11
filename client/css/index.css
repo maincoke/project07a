@@ -4,7 +4,8 @@ body{
   background-image: url('../img/fondo.jpg');
   background-size: cover;
 }
-.main{
+
+.main {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,14 +13,17 @@ body{
   height: 50.6rem;
   background-color: rgba(0, 0, 0, 0.5);
 }
-.login-container{
+
+.login-container {
   width: 40%;
 }
-.callout.login h4{
+
+.callout.login h4 {
   text-align: center;
   color: #8B0913;
 }
-div.btn-container{
+
+div.btn-container {
   display: flex;
   justify-content: center;
 }
