@@ -37,5 +37,6 @@ class Login {
 }
 
 $(function() {
+  $(document).foundation();
   var l = new Login();
 });

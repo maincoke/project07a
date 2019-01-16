@@ -1,8 +1,10 @@
-@import 'app.css';
-
 body{
   background-image: url('../img/fondo.jpg');
   background-size: cover;
+}
+
+h2 {
+  color: darkblue;
 }
 
 .main {

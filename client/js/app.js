@@ -13,7 +13,7 @@ class EventsManager {
           contentType: false,
           type: 'GET',
           success: (data) => {
-            if (data.msg=="OK") {
+            if (data.msg == "OK") {
               this.poblarCalendario(data.eventos);
             } else {
               alert(data.msg);
@@ -55,7 +55,7 @@ class EventsManager {
             var x2 = ofs.left + trashEl.outerWidth(true);
             var y1 = ofs.top;
             var y2 = ofs.top + trashEl.outerHeight(true);
-            if (jsEvent.pageX >= x1 && jsEvent.pageX<= x2 &&
+            if (jsEvent.pageX >= x1 && jsEvent.pageX <= x2 &&
                 jsEvent.pageY >= y1 && jsEvent.pageY <= y2) {
                   this.eliminarEvento(event, jsEvent);
                   $('.calendario').fullCalendar('removeEvents', event.id);
@@ -98,9 +98,9 @@ class EventsManager {
             } else {
               $('.calendario').fullCalendar('renderEvent', {
                 title: $('#titulo').val(),
-                start: $('#start_date').val()+" "+$('#start_hour').val(),
+                start: $('#start_date').val() + "  " + $('#start_hour').val(),
                 allDay: false,
-                end: $('#end_date').val()+" "+$('#end_hour').val()
+                end: $('#end_date').val() + " " + $('#end_hour').val()
               });
             }
           } else {
@@ -108,7 +108,7 @@ class EventsManager {
           }
         },
         error: () => {
-          alert("error en la comunicación con el servidor");
+          alert("Hubo un error en la comunicación con el servidor!!");
         }
       });
     }
@@ -180,6 +180,10 @@ class EventsManager {
 }
 
 function initForm(){
+  $('#link-modal').click(function(evt) {
+    evt.preventDefault();
+    $('#modal').reveal();
+  });
   $('#start_date, #titulo, #end_date').val('');
   $('#start_date, #end_date').datepicker({
     dateFormat: "yy-mm-dd"
