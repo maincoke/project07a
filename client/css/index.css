@@ -3,8 +3,9 @@ body{
   background-size: cover;
 }
 
-h2 {
+#modalTitle {
   color: darkblue;
+  font-weight: bolder;
 }
 
 .main {
@@ -28,4 +29,8 @@ h2 {
 div.btn-container {
   display: flex;
   justify-content: center;
+}
+
+button.success {
+  color: white !important;
 }
