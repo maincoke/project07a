@@ -16,7 +16,7 @@
       <div class="login-container">
         <div class="callout primary login">
           <h4>Inicia sesión</h4>
-          <form id="login">
+          <form id="login" autocomplete="off">
             <div class="row text-center">
               <div class="small-8 small-offset-2 columns">
                 <label>Usuario
@@ -41,54 +41,68 @@
     </div>
 
     <!-- Modal de Registro -->
-    <div class="small reveal" id="myModal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <div class="small reveal" id="myModal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" data-reset-on-close = "true">
       <h2 id="modalTitle" class="text-center ">Registro <small>Datos de Usuario</small></h2>
       <hr>
-      <form id="signup">
+      <form id="signup" method="POST" data-abide novalidate autocomplete="off" data-validate-on-blur = "true">
         <div class="row">
           <div class="small-6 column">
-            <label for="">Nombres
-              <input id="fnamesusr" type="text" placeholder="Primer y segundo(opcional) nombre" required>
+            <label for="fnamesusr">Nombres
+              <input id="fnamesusr" type="text" placeholder="Primer y segundo(opcional) nombre" required pattern="alpha">
             </label>
+            <label class="form-error" data-form-error-for="fnamesusr">Los nombres no son válidos ó estan vacíos.</label>
           </div>
           <div class="small-6 column">
-              <label for="">Apellidos
-                <input id="lnamesusr" type="text" placeholder="Primer y segundo(opcional) apellido" required>
-              </label>
+            <label for="lnamesusr">Apellidos
+              <input id="lnamesusr" type="text" placeholder="Primer y segundo(opcional) apellido" required pattern="alpha">
+            </label>
+            <label class="form-error" data-form-error-for="lnamesusr">Los apellidos no son válidos ó estan vacíos.</label>
           </div>
         </div>
         <div class="row">
           <div class="small-3 column">
-            <label for="">Fecha de Nacimiento
-              <input id="dbirthusr" type="text" class="span2" placeholder="Ej: 01-01-2000" required>
+            <label for="dbirthusr">Fecha de Nacimiento
+              <input id="dbirthusr" type="text" class="span2" placeholder="Ej: 01-01-2000" required pattern="day_month_year">
             </label>
+            <label class="form-error" data-form-error-for="dbirthusr">La fecha es inválida o está vacía.</label>
           </div>
           <div class="small-9 column">
-            <label for="">Correo electrónico
-              <input id="emailausr" type="email" placeholder="Ej: usuario@mail.com" required>
+            <label for="emailausr">Correo electrónico
+              <input id="emailausr" type="email" placeholder="Ej: usuario@mail.com" required pattern="email">
             </label>
+            <label class="form-error" data-form-error-for="emailausr">El dirección de correo es inválido o está vacío.</label>
           </div>
         </div>
         <div class="row">
           <div class="small-6 column">
-            <label for="">Contraseña
-              <input id="passwdusr" type="password" placeholder="Contraseña para la cuenta" required>
+            <label for="passwdusr">Contraseña
+              <input id="passwdusr" type="password" placeholder="Contraseña para la cuenta" required pattern="alpha_numeric">
+                        <!--aria-errormessage="errorPasswd" aria-describedby="passedDescrip"-->
             </label>
+            <p class="help-text" id="passwdDescrip">Debe ingresar una contraseña alfanumérica minimo de 8 dígitos.</p>
+            <label class="form-error" data-form-error-for="passwdusr">La contraseña no es válida ó esta vacía</label>
           </div>
           <div class="small-6 column">
-            <label for="">Confirmar contraseña
-              <input id="confirmpw" type="password" placeholder="Confirmación de contraseña" required>
+            <label for="confirmpw">Confirmar contraseña
+              <input id="confirmpw" type="password" placeholder="Confirmación de contraseña" required pattern="alpha_numeric" data-equalto = "passwdusr">
             </label>
+            <p class="help-text" id="confirmDescrip">Ingrese la misma contraseña anterior para que coincidan.</p>
+            <label class="form-error" data-form-error-for="confirmpw">La contraseña no coincide ó esta vacía</label>
           </div>
         </div>
         <hr>
         <div class="row" >
           <div class="small-12 column">
-            <input id="condterms" type="checkbox">
-            <label for="">Acepto los <a href="#">términos y condiciones</a> del uso de la Agenda.</label>
+            <input id="condterms" type="checkbox" required>
+            <label for="condterms">Acepto los <a href="#">términos y condiciones</a> del uso de la Agenda.</label>
           </div>
-          <div class="small-12 column">
-            <button class="button success" type="submit">Registrar</button>
+          <div class="small-4 column">
+            <button class="button success disabled" type="submit" id="signupUser" disabled="true">Registrar</button>
+          </div>
+          <div class="small-8 column">
+            <div class="callout alert" style="display: none;" data-abide-error>
+              <p><i class="fi-alert size-18"></i>Los datos no son correctos o algunos están vacíos!!.</p>
+            </div>
           </div>
         </div>
       </form>

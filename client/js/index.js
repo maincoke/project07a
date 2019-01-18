@@ -44,15 +44,7 @@ class Singup {
   singInEvent() {
     $('form#signup').submit(event => {
       event.preventDefault();
-      let sw1 = $('#passwdusr').val() !== $('#confirmpw').val() ? false : true;
-      let sw2 = $('#condterms').prop('checked');
-      if (sw1 && sw2) {
-        this.userSignUp();
-      } else if (!sw1) {
-        alert('Las contraseñas ingresadas no coinciden!!')
-      } else if (!sw2) {
-        alert('No ha aceptado los términos y codiciones del uso de la Agenda!!');
-      }
+      this.userSignUp();
     });
   }
 
@@ -73,15 +65,16 @@ class Singup {
       success: function(response) {
         if (response.msg = 'ok') {
           alert('Usuario registrado con éxito!!');
-          $('form#signup').reset();
           $('myModal').foundation('close');
         } else {
           alert(response.msg);
         }
+        window.location = 'index.html';
       },
       error: function(error) {
         console.log(error);
         alert('Hubo un error en la comunicación con el servidor de registro!!');
+        window.location = 'index.html';
       }
     });
   }
@@ -89,6 +82,22 @@ class Singup {
 
 $(function() {
   $(document).foundation();
+  $('#myModal').on('closed.zf.reveal', function() {
+    window.location = 'index.html';
+  });
+  $('form#signup').on('valid.zf.abide', function(event) {
+    let validForm = $(event.target).attr('id');
+    if ($.inArray(validForm, dataUsr) == -1) { dataUsr.push(validForm) }
+    console.log(dataUsr);
+    if (dataUsr.length == 7) { $('#signupUser').removeAttr('disabled').removeClass('disabled') }
+  }).on('invalid.zf.abide', function(event) {
+    let invalidForm = $(event.target).attr('id');
+    if (dataUsr.length != 0 && $.inArray(invalidForm, dataUsr) != -1) { 
+      dataUsr = $.grep(dataUsr, function(val) { return val != invalidForm });
+    }
+    console.log(dataUsr);
+    if (dataUsr.length != 7 ) { $('#signupUser').addClass('disabled').attr('disabled', 'true') }
+  });
   $('#dbirthusr').fdatepicker({
     format: 'dd-mm-yyyy',
     disableDblClickSelection: true,
@@ -101,4 +110,5 @@ $(function() {
   });
   var l = new Login();
   var r = new Singup();
+  var dataUsr = Array();
 });
