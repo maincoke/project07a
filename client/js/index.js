@@ -41,6 +41,11 @@ class Singup {
     this.singInEvent();
   }
 
+  stringToDate(strDate) {
+    let dmy = strDate.split('-');
+    return dmy[2] + '-' + dmy[1] + '-' + dmy[0];
+  }
+
   singInEvent() {
     $('form#signup').submit(event => {
       event.preventDefault();
@@ -51,7 +56,7 @@ class Singup {
   userSignUp() {
     let user_data =new FormData();
     user_data.append('userfnames', $('#fnamesusr').val() + ' ' + $('#lnamesusr').val());
-    user_data.append('userdbirth', $('#dbirthusr').val());
+    user_data.append('userdbirth', this.stringToDate($('#dbirthusr').val()));
     user_data.append('useremaila', $('#emailausr').val());
     user_data.append('userpasswd', $('#passwdusr').val());
     $.ajax({
@@ -63,16 +68,13 @@ class Singup {
       contentType: false,
       data: user_data,
       success: function(response) {
-        if (response.msg = 'ok') {
-          alert('Usuario registrado con éxito!!');
-          $('myModal').foundation('close');
-        } else {
+        if (response.result == 'ok') {
           alert(response.msg);
+          $('#myModal').foundation('close');
         }
         window.location = 'index.html';
       },
-      error: function(error) {
-        console.log(error);
+      error: function() {
         alert('Hubo un error en la comunicación con el servidor de registro!!');
         window.location = 'index.html';
       }
@@ -88,14 +90,12 @@ $(function() {
   $('form#signup').on('valid.zf.abide', function(event) {
     let validForm = $(event.target).attr('id');
     if ($.inArray(validForm, dataUsr) == -1) { dataUsr.push(validForm) }
-    console.log(dataUsr);
     if (dataUsr.length == 7) { $('#signupUser').removeAttr('disabled').removeClass('disabled') }
   }).on('invalid.zf.abide', function(event) {
     let invalidForm = $(event.target).attr('id');
     if (dataUsr.length != 0 && $.inArray(invalidForm, dataUsr) != -1) { 
       dataUsr = $.grep(dataUsr, function(val) { return val != invalidForm });
     }
-    console.log(dataUsr);
     if (dataUsr.length != 7 ) { $('#signupUser').addClass('disabled').attr('disabled', 'true') }
   });
   $('#dbirthusr').fdatepicker({
