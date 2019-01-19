@@ -18,7 +18,7 @@ $datain['pworduser'] = password_hash($datauser['userpasswd'], PASSWORD_DEFAULT);
 $con = new DBConnector('localhost', 'admin', 'nextudbadmin', 'schedule_db');
 if ($con->initConnection()) {
   $response['result'] = 'ok';
-  $emailCheck = $con->simpleBringData(['users'], ['emailuser'], 'emailuser ="'.$datauser['useremaila'].'"');
+  $emailCheck = $con->simpleBringData(['users'], ['emailuser'], 'emailuser = "'.$datauser['useremaila'].'"');
   if ($emailCheck->num_rows == 0) {
     if ($con->insertData('users', $datain)) {
       $response['msg'] = "Datos de usuario registrados con éxito!!";

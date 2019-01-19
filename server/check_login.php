@@ -4,7 +4,7 @@
   $con = new DBConnector('localhost', 'admin', 'nextudbadmin', 'schedule_db');
   
   if ($con->initConnection()) {
-    $checkCreds = $con->simpleBringData(['users'], ['emailuser', 'pworduser'], 'emailuser ="'.$_POST['username'].'"');
+    $checkCreds = $con->simpleBringData(['users'], ['emailuser', 'pworduser'], 'emailuser = "'.$_POST['username'].'"');
     if ($checkCreds->num_rows != 0) {
       $response['access'] = false;
       $queryCred = $checkCreds->fetch_assoc();

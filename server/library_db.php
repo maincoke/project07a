@@ -26,7 +26,15 @@ class DBConnector {
       return true;
     }
   }
-
+  // Establecimiento de Conjunto de caracteres
+  function setCharSet($charset){
+    if ($this->dbconex->set_charset($charset)) {
+      return true;
+    } else {
+      echo 'Error: '.$this->dbconex->error;
+      return false;
+    }
+  }
   // Finalizacion de la Conexion con la BD
   function closeConnection(){
     $this->dbconex->close(); // Para motor MySQL ó MariaDB
