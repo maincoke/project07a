@@ -25,7 +25,8 @@ if (isset($_SESSION['username'])) {
     $idUser = $con->simpleBringData(['users'], ['identusr', 'emailuser'], 'emailuser = "'.$_SESSION['username'].'"');
     $userRow = $idUser->fetch_assoc();
     $datain['fk_iduser'] = $userRow['identusr'];
-    if ($con->insertData('events', $datain)) {
+    if ($newevent = $con->insertData('events', $datain)) {
+      $response['idevt'] = $con->lastRow();
       $response['result'] = 'ok';
       $response['msg'] = 'El evento fue registrado con éxito!!';
     } else {

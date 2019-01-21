@@ -85,12 +85,6 @@ class EventsManager {
         form_data.append('end_hour', "");
         form_data.append('start_hour', "");
       }
-      /*console.log($('#titulo').val());
-      console.log($('#start_date').val());
-      console.log($('#allDay').prop('checked'));
-      console.log($('#start_hour').val());
-      console.log($('#end_date').val());
-      console.log($('#end_hour').val());*/
       $.ajax({
         url: '../server/new_event.php',
         dataType: "json",
@@ -104,25 +98,27 @@ class EventsManager {
             alert(data.msg);
             if ($('#allDay').prop('checked')) {
               $('.calendario').fullCalendar('renderEvent', {
+                id: data.idevt,
                 title: $('#titulo').val(),
                 start: $('#start_date').val(),
                 allDay: true
-              });
+              }, true);
             } else {
               $('.calendario').fullCalendar('renderEvent', {
+                id: data.idevt,
                 title: $('#titulo').val(),
                 start: $('#start_date').val() + "T" + $('#start_hour').val(),
                 allDay: false,
                 end: $('#end_date').val() + "T" + $('#end_hour').val()
-              });
+              }, true);
             }
             $('#eventForm').trigger('reset');
+            $('.calendario').fullCalendar('rerenderEvents');
           } else {
             alert(data.msg);
           }
         },
-        error: (error) => {
-          console.log(error);
+        error: () => {
           alert("Hubo un error en la comunicación con el servidor!!");
         }
       });
@@ -130,7 +126,7 @@ class EventsManager {
 
     eliminarEvento(event, jsEvent){
       var form_data = new FormData()
-      form_data.append('id', event.id);
+      form_data.append('id', parseFloat(event.id));
       $.ajax({
         url: '../server/delete_event.php',
         dataType: "json",
@@ -140,11 +136,12 @@ class EventsManager {
         data: form_data,
         type: 'POST',
         success: (data) => {
-          if (data.msg == "OK") {
-            alert('Se ha eliminado el evento con éxito!!');
+          if (data.result == 'ok') {
+            alert(data.msg);
           } else {
             alert(data.msg);
           }
+          $('.calendario').fullCalendar('rerenderEvents');
         },
         error: () => {
           alert("Hubo un error en la comunicación con el servidor!!");
@@ -162,7 +159,7 @@ class EventsManager {
             start_date,
             end_date,
             start_hour,
-            end_hour
+            end_hour;
         start_date = start.substr(0,10);
         end_date = end.substr(0,10);
         start_hour = start.substr(11,8);
@@ -181,13 +178,15 @@ class EventsManager {
           data: form_data,
           type: 'POST',
           success: (data) => {
-            if (data.msg == "OK") {
-              alert('Se ha actualizado el evento con éxito!!');
+            if (data.result == 'ok') {
+              alert(data.msg);
+              //
             } else {
               alert(data.msg);
             }
           },
-          error: () => {
+          error: (error) => {
+            console.log(error);
             alert("Hubo un error en la comunicación con el servidor!!");
           }
         });

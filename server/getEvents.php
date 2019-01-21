@@ -7,11 +7,12 @@ if (isset($_SESSION['username'])) {
   if ($con->initConnection() and $con->setCharSet('utf8')) {
     $idUser = $con->simpleBringData(['users'], ['identusr', 'emailuser'], 'emailuser = "'.$_SESSION['username'].'"');
     $userRow = $idUser->fetch_assoc();
-    $fetchEventsUser = $con->simpleBringData(['events AS e'], ['e.evttitles AS title', 'e.evtbgindt AS start_date', PHP_EOL.
+    $fetchEventsUser = $con->simpleBringData(['events AS e'], ['e.identevt AS idevt, e.evttitles AS title', 'e.evtbgindt AS start_date', PHP_EOL.
                                               'e.evtbgintm AS start_time', 'e.evtenddat AS end_date', 'e.evtendtim AS end_time', PHP_EOL.
                                               'e.evtfulday AS full_day', 'e.fk_iduser AS id_user'], 'e.fk_iduser = '.$userRow['identusr']);
     $i = 0;
     while ($eventsUser = $fetchEventsUser->fetch_assoc()) {
+      $resp['eventos'][$i]['id'] = $eventsUser['idevt'];
       $resp['eventos'][$i]['title'] = $eventsUser['title'];
       $startDate = !is_null($eventsUser['start_time']) ? $eventsUser['start_date'].'T'.$eventsUser['start_time'] : $eventsUser['start_date'];
       $resp['eventos'][$i]['start'] = $startDate;

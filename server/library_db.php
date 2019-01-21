@@ -80,6 +80,11 @@ class DBConnector {
     return $this->runQuery($qsql);
   }
 
+  // Obtener el ultimo registro de tabla por Auto_increment ID
+  function lastRow(){
+    return $this->dbconex->insert_id;
+  }
+
   // Insercion de datos en tablas de la BD
   function insertData($name_tbl, $data){
     $qsql = 'INSERT INTO '.$name_tbl.' (';
