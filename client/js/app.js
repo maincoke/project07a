@@ -113,7 +113,6 @@ class EventsManager {
               }, true);
             }
             $('#eventForm').trigger('reset');
-            $('.calendario').fullCalendar('rerenderEvents');
           } else {
             alert(data.msg);
           }
