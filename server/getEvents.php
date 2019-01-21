@@ -33,12 +33,6 @@ if (isset($_SESSION['username'])) {
 }
 
 echo json_encode($resp);
-/*echo $userRow['emailuser'].'<br>';
-echo $rows.' ---- '.$row2;
-echo $resp['eventos'][0]['title'].'<br>';
-echo $resp['eventos'][1]['title'].'<br>';
-echo $resp['eventos'][0]['start_date'].'<br>';
-echo $resp['eventos'][1]['start_date'].'<br>';*/
 
 $con->closeConnection();
 ?>

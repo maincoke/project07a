@@ -100,9 +100,9 @@ class EventsManager {
         data: form_data,
         type: 'POST',
         success: (data) => {
-          if (data.msg=="OK") {
-            alert('Se ha añadido el evento exitosamente');
-            if (document.getElementById('allDay').checked) {
+          if (data.result == 'ok') {
+            alert(data.msg);
+            if ($('#allDay').prop('checked')) {
               $('.calendario').fullCalendar('renderEvent', {
                 title: $('#titulo').val(),
                 start: $('#start_date').val(),
@@ -111,16 +111,18 @@ class EventsManager {
             } else {
               $('.calendario').fullCalendar('renderEvent', {
                 title: $('#titulo').val(),
-                start: $('#start_date').val() + "  " + $('#start_hour').val(),
+                start: $('#start_date').val() + "T" + $('#start_hour').val(),
                 allDay: false,
-                end: $('#end_date').val() + " " + $('#end_hour').val()
+                end: $('#end_date').val() + "T" + $('#end_hour').val()
               });
             }
+            $('#eventForm').trigger('reset');
           } else {
             alert(data.msg);
           }
         },
-        error: () => {
+        error: (error) => {
+          console.log(error);
           alert("Hubo un error en la comunicación con el servidor!!");
         }
       });
