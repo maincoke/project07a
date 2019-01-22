@@ -45,23 +45,25 @@ div.top-bar-left h3 {
 
 .right-cont {
   width: 30%;
+  height: 100%;
   display: flex;
   flex-flow: column nowrap;
   padding: 1em;
 }
 
 .add-btn {
-  height: 70%;
+  height: 75%;
   padding: 0.5em;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-flow: row wrap;
   color: #fff;
+  background-color: #404F66;
 }
 
-.add-btn {
-  background-color: #404F66;
+.add-btn h5 {
+  padding: 0.5em 0.5em;
 }
 
 label {
@@ -69,6 +71,7 @@ label {
 }
 
 .callout.alert {
+  margin: 0 0 0.25rem 0 !important;
   padding: 0.25rem 0.5rem !important;
   border-radius: 10px !important;
   color: #d4404a !important;
@@ -98,7 +101,7 @@ button.primary {
 
 .delete-btn {
   padding: 1em;
-  height: 20%;
+  height: 25%;
   background-color: #8B0913;
   display: flex;
   flex-flow: row wrap;

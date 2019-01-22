@@ -34,19 +34,17 @@
           <form id="eventForm" autocomplete="off" method="POST" data-abide novalidate data-validate-on-blur = "true">
             <div class="row">
               <div class="small-12 columns">
-                <label>Título del evento
-                  <input type="text" id="titulo" aria-errormessage="noTitle" required>
-                  <span class="form-error callout alert" id="noTitle">Título no válido o esta vacío</span>
+                <label>Título del evento <span class="form-error callout alert" id="noTitle">Título no válido o esta vacío</span>
+                  <input type="text" id="titulo" aria-errormessage="noTitle" required>                  
                 </label>
               </div>
               <div class="small-8 columns">
-                <label>Fecha inicio
+                <label>Fecha inicio <span class="form-error callout alert" id="noDateStart">Fecha no válida o esta vacía</span>
                   <input type="text" id="start_date" aria-errormessage="noDateStart" required pattern="date">
-                  <span class="form-error callout alert" id="noDateStart">Fecha no válida o esta vacía</span>
                 </label>
               </div>
               <fieldset class="small-4 columns" id="dia-set">
-                <input id="allDay" type="checkbox" data-abide-ignore checked><label for="allDay">Día entero</label>
+                <input id="allDay" type="checkbox" data-abide-ignore checked value="true"><label for="allDay">Día entero</label>
               </fieldset>
               <div class="small-8 columns">
                 <label>Fecha fin

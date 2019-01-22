@@ -12,36 +12,39 @@ if (isset($_SESSION['username'])) {
       $dataevent[$key] = $value;
     }
   }
-  $datain['evttitles'] = $dataevent['titulo'];
-  $datain['evtbgindt'] = $dataevent['start_date'];
-  $datain['evtfulday'] = $dataevent['allDay'];
-  if (!$dataevent['allDay']) {
-    $datain['evtbgintm'] = $dataevent['start_hour'];
-    $datain['evtenddat'] = $dataevent['end_date'];
-    $datain['evtendtim'] = $dataevent['end_hour'];
-  }
-  $con = new DBConnector('localhost', 'admin', 'nextudbadmin', 'schedule_db');
-  if ($con->initConnection() and $con->setCharSet('utf8')) {
-    $idUser = $con->simpleBringData(['users'], ['identusr', 'emailuser'], 'emailuser = "'.$_SESSION['username'].'"');
-    $userRow = $idUser->fetch_assoc();
-    $datain['fk_iduser'] = $userRow['identusr'];
-    if ($newevent = $con->insertData('events', $datain)) {
-      $response['idevt'] = $con->lastRow();
-      $response['result'] = 'ok';
-      $response['msg'] = 'El evento fue registrado con éxito!!';
-    } else {
-      $response['result'] = '';
-      $response['msg'] = 'Hubo un error en el registro del evento en la BD!!';
+  $response['result'] = '';
+  if (!empty($dataevent['titulo']) and !empty($dataevent['start_date'])) {
+    $datain['evttitles'] = $dataevent['titulo'];
+    $datain['evtbgindt'] = $dataevent['start_date'];
+    $datain['evtfulday'] = $dataevent['allDay'];
+    if (!$dataevent['allDay']) {
+      $datain['evtbgintm'] = $dataevent['start_hour'];
+      $datain['evtenddat'] = $dataevent['end_date'];
+      $datain['evtendtim'] = $dataevent['end_hour'];
     }
+    $con = new DBConnector('localhost', 'admin', 'nextudbadmin', 'schedule_db');
+    if ($con->initConnection() and $con->setCharSet('utf8')) {
+      $idUser = $con->simpleBringData(['users'], ['identusr', 'emailuser'], 'emailuser = "'.$_SESSION['username'].'"');
+      $userRow = $idUser->fetch_assoc();
+      $datain['fk_iduser'] = $userRow['identusr'];
+      if ($con->insertData('events', $datain)) {
+        $response['idevt'] = $con->lastRow();
+        $response['result'] = 'ok';
+        $response['msg'] = 'El evento fue registrado con éxito!!';
+      } else {
+        $response['msg'] = 'Hubo un error en el registro del evento en la BD!!';
+      }
+    } else {
+      $response['msg'] = "Hubo un error en la conexión con la BD!!";
+    }
+    $con->closeConnection();
   } else {
-    $response['msg'] = "Hubo un error en la conexión con la BD!!";
+    $response['msg'] = 'Datos inválidos del evento para el registro en la BD!!';
   }
 } else {
   $response['msg'] = "El usuario no ha iniciado sesión o la sesión expiró!!";
 }
 
 echo json_encode($response);
-
-$con->closeConnection();
 
 ?>
