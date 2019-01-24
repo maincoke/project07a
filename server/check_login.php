@@ -1,4 +1,5 @@
 <?php
+  // Modulo de Login y Verificación de Credenciales para el acceso --//
   require('./library_db.php');
 
   $con = new DBConnector('localhost', 'admin', 'nextudbadmin', 'schedule_db');

@@ -1,4 +1,5 @@
 <?php
+// Modulo para el registro en BD de los nuevos eventos --//
 require('./library_db.php');
 session_start();
 

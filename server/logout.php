@@ -1,4 +1,5 @@
 <?php
+// Modulo para el Logout y desconexión del usuario --//
 session_start();
 
 if (isset($_SESSION['username'])) {

@@ -1,4 +1,5 @@
 <?php
+// Modulo para la obtención de los eventos registrados desde la BD --//
 require('./library_db.php');
 session_start();
 

@@ -1,4 +1,5 @@
 <?php
+// Modulo para el borrado en BD de los eventos registrados --//
 require('./library_db.php');
 session_start();
 

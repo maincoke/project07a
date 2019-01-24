@@ -1,4 +1,5 @@
 <?php
+// Modulo para la verificación y creación de cuenta de usuario --//
 require('./library_db.php');
 $datauser = [];
 $datain = [];
