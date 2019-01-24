@@ -12,7 +12,7 @@ if (isset($_SESSION['username'])) {
                                               'e.evtfulday AS full_day', 'e.fk_iduser AS id_user'], 'e.fk_iduser = '.$userRow['identusr']);
     $i = 0;
     while ($eventsUser = $fetchEventsUser->fetch_assoc()) {
-      $resp['eventos'][$i]['id'] = $eventsUser['idevt'];
+      $resp['eventos'][$i]['id'] = (int)$eventsUser['idevt'];
       $resp['eventos'][$i]['title'] = $eventsUser['title'];
       $startDate = !is_null($eventsUser['start_time']) ? $eventsUser['start_date'].'T'.$eventsUser['start_time'] : $eventsUser['start_date'];
       $resp['eventos'][$i]['start'] = $startDate;

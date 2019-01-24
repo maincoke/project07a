@@ -13,6 +13,7 @@
   
   <body>
     <div class="main">
+      <!--/// Contenedor para el Login de Usuarios ///-->
       <div class="login-container">
         <div class="callout primary login">
           <h4>Inicia sesión</h4>
@@ -31,6 +32,7 @@
               <div class="small-12 columns btn-container">
                 <button type="submit" class="button">Enviar</button>
               </div>
+              <!-- /// Acceso a la ventana de registro de nuevo usuario ///-->
               <div class="small-12 columns">
                 <h6 class="text-center">¿Aún no tienes una cuenta? <a href="#" data-open="myModal">Regístrate</a></h6>
               </div>
@@ -40,7 +42,7 @@
       </div>
     </div>
 
-    <!-- Modal de Registro -->
+    <!--/// Ventana Modal para el Registro de nuevo usuario ///-->
     <div class="small reveal" id="myModal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" data-reset-on-close = "true">
       <h2 id="modalTitle" class="text-center ">Registro <small>Datos de Usuario</small></h2>
       <hr>
@@ -77,7 +79,6 @@
           <div class="small-6 column">
             <label for="passwdusr">Contraseña
               <input id="passwdusr" type="password" placeholder="Contraseña para la cuenta" required pattern="alpha_numeric">
-                        <!--aria-errormessage="errorPasswd" aria-describedby="passedDescrip"-->
             </label>
             <p class="help-text" id="passwdDescrip">Debe ingresar una contraseña alfanumérica minimo de 8 dígitos.</p>
             <label class="form-error" data-form-error-for="passwdusr">La contraseña no es válida ó esta vacía</label>

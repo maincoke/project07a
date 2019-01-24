@@ -1,13 +1,15 @@
+/***      Estilos personalizados para la página de Inicio/Login ***/
+
 body{
   background-image: url('../img/fondo.jpg');
   background-size: cover;
 }
-
+/*-- Estilo para el titulo de la Modal de Usuarios --*/
 #modalTitle {
   color: darkblue;
   font-weight: bolder;
 }
-
+/*-- Estilo para el contenedor principal --*/
 .main {
   display: flex;
   align-items: center;
@@ -16,21 +18,21 @@ body{
   height: 50.6rem;
   background-color: rgba(0, 0, 0, 0.5);
 }
-
+/*-- Estilo para el contenedor de Login --*/
 .login-container {
   width: 40%;
 }
-
+/*-- Estilo para el título del COntenedor de Login --*/
 .callout.login h4 {
   text-align: center;
   color: #8B0913;
 }
-
+/*-- Estilo para el contenedor del Boton de Enviar/Login --*/
 div.btn-container {
   display: flex;
   justify-content: center;
 }
-
+/*-- Estilo para el boton de Enviar/Login --*/
 button.success {
   color: white !important;
 }

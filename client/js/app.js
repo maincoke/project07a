@@ -1,8 +1,11 @@
+/**
+ * Clase controladora de construccion y funcionalidad del Calendario *
+ */
 class EventsManager {
   constructor() {
       this.obtenerDataInicial();
   }
-
+  /** Funcion/Evento para la obtención de los eventos agendados previamente */
   obtenerDataInicial() {
       let url = '../server/getEvents.php';
       $.ajax({
@@ -25,7 +28,7 @@ class EventsManager {
         }
       });
   }
-
+  /** Funcion/Evento para la inicialización de la API Fullcalendar y sus eventos de funcionalidad */
   poblarCalendario(eventos) {
     let today = new Date();
       $('.calendario:first').fullCalendar({
@@ -73,7 +76,7 @@ class EventsManager {
         }
       });
   }
-
+  /** Funcion/Evento para el envio y registro de nuevos eventos para agregar al calendario */
   anadirEvento(){
     var form_data = new FormData();
     form_data.append('titulo', $('#titulo').val());
@@ -101,14 +104,14 @@ class EventsManager {
           alert(data.msg);
           if ($('#allDay').prop('checked')) {
             $('.calendario').fullCalendar('renderEvent', {
-              id: data.idevt,
+              id: parseFloat(data.idevt),
               title: $('#titulo').val(),
               start: $('#start_date').val(),
               allDay: true
             }, true);
           } else {
             $('.calendario').fullCalendar('renderEvent', {
-              id: data.idevt,
+              id: parseFloat(data.idevt),
               title: $('#titulo').val(),
               start: $('#start_date').val() + "T" + $('#start_hour').val(),
               allDay: false,
@@ -125,7 +128,7 @@ class EventsManager {
       }
     });
   }
-
+  /** Funcion/Evento para el borrado de los eventos agregados al calendario */
   eliminarEvento(event, jsEvent){
     var form_data = new FormData()
     form_data.append('id', parseFloat(event.id));
@@ -152,33 +155,25 @@ class EventsManager {
     $('.delete-btn').find('img').attr('src', "img/trash.png");
     $('.delete-btn').css('background-color', '#8B0913');
   }
-
+  /** Funcion/Evento para la actualización y cambios de eventos agregados al calendario */
   actualizarEvento(evento) {
-    console.log(evento);
-    let id = evento.id,
-        start = moment(evento.start).format('YYYY-MM-DD HH:mm:ss'),
+    let start = moment(evento.start).format('YYYY-MM-DD HH:mm:ss'),
         end = moment(evento.end).format('YYYY-MM-DD HH:mm:ss'),
         start_date,
         end_date,
         start_hour,
         end_hour,
         form_data = new FormData();
-    start_date = start.substr(0,10);
-    end_date = end.substr(0,10);
-    start_hour = start.substr(11,8);
-    end_hour = end.substr(11,8);
-    form_data.append('id', parseFloat(id));
-    form_data.append('start_date', start_date.toString());
-    form_data.append('end_date', end_date.toString());
-    form_data.append('start_hour', start_hour.toString());
-    form_data.append('end_hour', end_hour.toString());
+    start_date = start.substr(0, 10);
+    end_date = end.substr(0, 10);
+    start_hour = start.substr(11, 8);
+    end_hour = end.substr(11, 8);
+    form_data.append('id', parseFloat(evento.id));
+    form_data.append('start_date', start_date);
+    form_data.append('end_date', end_date);
+    form_data.append('start_hour', start_hour);
+    form_data.append('end_hour', end_hour);
     form_data.append('fullday', evento.allDay);
-    console.log(id);
-    console.log(start_date);
-    console.log(end_date);
-    console.log(start_hour);
-    console.log(end_hour);
-    console.log(evento.allDay);
     $.ajax({
       url: '../server/update_event.php',
       dataType: "json",
@@ -195,14 +190,15 @@ class EventsManager {
         }
         initForm();
       },
-      error: (error) => {
-        console.log(error);
+      error: () => {
         alert("Hubo un error en la comunicación con el servidor!!");
       }
     });
   }
 }
-
+/** 
+ * Funcion Global para la inicialización del Formulario y sus elementos para el registro de eventos al calendario *
+ */
 function initForm(){
   $('form#eventForm').trigger('reset');
   $('#start_date, #titulo, #end_date').val('');
@@ -233,13 +229,19 @@ function initForm(){
   $('#start_hour, #end_hour').val('07:00');
   $('.timepicker, #end_date').attr("disabled", "disabled");
 }
-
+/**
+ * Funcion Ready Document *
+ */
 $(function(){
+  /** Sentencia que inicializa el Framework CSS Foundation */
   $(document).foundation();
+  /** Sentencia para inicializar el formulario de registro de nuevos eventos */
   initForm();
-  var evt = new EventsManager();
+  /** Funcion/Evento para el envio y registro de los datos del formulario para registrar los eventos */
   $('form#eventForm').submit(function(event) {
     event.preventDefault();
     evt.anadirEvento();
   });
+  /** Inicialización de Instancia de Objeto para el Calendario */
+  var evt = new EventsManager();
 });

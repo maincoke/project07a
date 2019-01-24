@@ -1,3 +1,6 @@
+/***      Estilos personalizados para la página del Calendario ***/
+
+/*-- Estilos para la barra superior del Calendario --*/
 div.top-bar {
   background-color: #8B0913;
 }
@@ -14,7 +17,7 @@ div.top-bar {
 div.top-bar-left h3 {
   color: #fff;
 }
-
+/*-- Estilos para el contenedor principal y contenedores secundarios --*/
 .main-container {
   display: flex;
   flex-flow: row nowrap;
@@ -27,22 +30,6 @@ div.top-bar-left h3 {
   margin-top: 1em;
 }
 
-.fc-event, .fc-event-dot {
-  background-color: #404F66;
-}
-
-.fc-event {
-  border: 1px solid #404F66;
-}
-
-.fc-unthemed .fc-today {
-  background: #fed1d5;
-}
-
-.calendario {
-  height: 100%;
-}
-
 .right-cont {
   width: 30%;
   height: 100%;
@@ -50,7 +37,17 @@ div.top-bar-left h3 {
   flex-flow: column nowrap;
   padding: 1em;
 }
+/*-- Estilos para el contenedor del calendario --*/
+.calendario {
+  height: 100%;
+}
 
+.calendar {
+	width: 900px;
+	margin: 0 auto;
+}
+
+/*-- Estilos para el contenedor del formulario --*/
 .add-btn {
   height: 75%;
   padding: 0.5em;
@@ -61,7 +58,7 @@ div.top-bar-left h3 {
   color: #fff;
   background-color: #404F66;
 }
-
+/*-- Estilos para el formulario y elementos hijos --*/
 .add-btn h5 {
   padding: 0.5em 0.5em;
 }
@@ -98,7 +95,7 @@ button.primary {
   color: white !important;
   font-weight: bold !important;
 }
-
+/*-- Estilos para el contenedor de zona de borrado (Papelera) --*/
 .delete-btn {
   padding: 1em;
   height: 25%;
@@ -116,7 +113,7 @@ button.primary {
 .delete-btn img {
   height: 60px;
 }
-
+/*-- Estilos para los elementos de los eventos y tabla del calendario --*/
 table {
   background-color: transparent !important;
 }
@@ -125,7 +122,14 @@ table {
   background-color: transparent !important;
 }
 
-.calendar {
-	width: 900px;
-	margin: 0 auto;
+.fc-event, .fc-event-dot {
+  background-color: #404F66;
+}
+
+.fc-event {
+  border: 1px solid #404F66;
+}
+
+.fc-unthemed .fc-today {
+  background: #fed1d5;
 }

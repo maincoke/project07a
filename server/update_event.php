@@ -14,19 +14,19 @@ if (isset($_SESSION['username'])) {
   }
   $response['result'] = '';
   if (!empty($dataevent['start_date']) and !empty($dataevent['id'])) {
-    $dataup['evtbgindt'] = $dataevent['start_date'];
-    $dataup['evtfulday'] = $dataevent['fullday'];
+    $dataup['evtbgindt'] = "'".$dataevent['start_date']."'";
+    $dataup['evtfulday'] = !$dataevent['fullday'] ? 0 : 1;
     if (!$dataevent['fullday']) {
-      $dataup['evtbgintm'] = $dataevent['start_hour'];
-      $dataup['evtenddat'] = $dataevent['end_date'];
-      $dataup['evtendtim'] = $dataevent['end_hour'];
+      $dataup['evtenddat'] = "'".$dataevent['end_date']."'";
+      $dataup['evtbgintm'] = "'".$dataevent['start_hour']."'";
+      $dataup['evtendtim'] = "'".$dataevent['end_hour']."'";
     }
     $con = new DBConnector('localhost', 'admin', 'nextudbadmin', 'schedule_db');
     if ($con->initConnection() and $con->setCharSet('utf8')) {
       $idUser = $con->simpleBringData(['users'], ['identusr', 'emailuser'], 'emailuser = "'.$_SESSION['username'].'"');
       $userRow = $idUser->fetch_assoc();
-      $dataup['fk_iduser'] = $userRow['identusr'];
-      if ($con->updateData('events', $dataup, "identevt = {$dataevent['id']}")) {
+      $dataup['fk_iduser'] = (int)$userRow['identusr'];
+      if ($con->updateData('events', $dataup, "identevt = ".(int)$dataevent['id'])) {
         $response['result'] = 'ok';
         $response['msg'] = 'El evento fue cambiado con éxito!!';
       } else {
