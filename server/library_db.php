@@ -20,7 +20,7 @@ class DBConnector {
   function initConnection(){
     $this->dbconex = new mysqli($this->dbhost, $this->dbuser, $this->dbpass, $this->dbname); // Para motor MySQL ó MariaDB
     if ($this->dbconex->connect_error){
-      echo "Error: ".$this->dbconex->connect_error;
+      echo "Error: ".$this->dbconex->connect_error."<br>";
       return false;
     } else {
       return true;
@@ -31,14 +31,13 @@ class DBConnector {
     if ($this->dbconex->set_charset($charset)) {
       return true;
     } else {
-      echo 'Error: '.$this->dbconex->error;
+      echo 'Error: '.$this->dbconex->error."<br>";
       return false;
     }
   }
   // Finalizacion de la Conexion con la BD
   function closeConnection(){
     $this->dbconex->close(); // Para motor MySQL ó MariaDB
-    //$this->dbconex = null; // Para motor general de BD
   }
   
   // Ejecucion del Query para la gestión de operaciones SQL en la BD
@@ -52,7 +51,7 @@ class DBConnector {
   }
 
   // Creacion de la tabla en la BD con los campos solicitados en los parametro
-  function setNewTableQuery($name_tbl, $fields){
+  function setNewTableQuery($name_tbl, $fields, $options =''){
     $qsql = 'CREATE TABLE '.$name_tbl.' (';
     $length_array = count($fields);
     $i = 1;
@@ -61,10 +60,15 @@ class DBConnector {
       if ($i != $length_array){
         $qsql .= ', ';
       } else {
-        $qsql .= ');';
+        $qsql .= ')';
+        if ($options != '') {
+          $qsql .= ' '.$options;
+        }
+        $qsql .= ';';
       }
       $i++;
     }
+    //return $qsql;
     return $this->runQuery($qsql);
   }
 

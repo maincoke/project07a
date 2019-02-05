@@ -65,7 +65,7 @@ class Singup {
     user_data.append('useremaila', $('#emailausr').val());
     user_data.append('userpasswd', $('#passwdusr').val());
     $.ajax({
-      url: '../server/create_user.php',
+      url: '../server/signup_user.php',
       type: 'POST',
       dataType: 'json',
       cache: false,
