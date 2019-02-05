@@ -30,7 +30,8 @@ class EventsManager {
   }
   /** Funcion/Evento para la inicialización de la API Fullcalendar y sus eventos de funcionalidad */
   poblarCalendario(eventos) {
-    let today = new Date();
+    let thisday = new Date(),
+        today = moment(thisday.getFullYear().toString() + '-' + (thisday.getMonth() + 1).toString() + '-' + thisday.getDate().toString()).local().format();
       $('.calendario:first').fullCalendar({
           header: {
       		left: 'prev,next today',
@@ -40,7 +41,7 @@ class EventsManager {
         aspectRatio: 1.5,
         fixedWeekCount: false,
         timezone: 'local',
-        defaultDate: today.getFullYear().toString() + '-' + (today.getMonth() + 1).toString() + '-' + today.getDate().toString(),
+        defaultDate: today,
         nowIndicator: true,
         locale: 'es',
         themeSystem: 'jquery-ui',
